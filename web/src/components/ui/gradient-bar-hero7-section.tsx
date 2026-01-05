@@ -196,27 +196,55 @@ export const Component: React.FC = () => {
                         </div>
 
                         {/* Center Content */}
-                        <div className="space-y-8 animate-fadeIn text-center flex flex-col items-center relative z-10 p-4">
-                            <h1 className="text-slate-900 leading-[1.05] font-semibold text-[clamp(2rem,5.5vw,4.5rem)] tracking-tight" style={{
+                        <div className="space-y-10 animate-fadeIn text-center flex flex-col items-center relative z-10 p-4">
+                            <style jsx>{`
+                                @keyframes reveal-text {
+                                    from { opacity: 0; transform: translateY(20px); }
+                                    to { opacity: 1; transform: translateY(0); }
+                                }
+                                @keyframes subtle-float {
+                                    0%, 100% { transform: translateY(0); }
+                                    50% { transform: translateY(-10px); }
+                                }
+                                .animate-reveal-word {
+                                    opacity: 0;
+                                    display: inline-block;
+                                    animation: reveal-text 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+                                }
+                                .animate-live-float {
+                                    display: inline-block;
+                                    animation: subtle-float 6s ease-in-out infinite;
+                                }
+                            `}</style>
+
+                            <h1 className="text-slate-900 leading-[1.1] tracking-tight max-w-[1000px]" style={{
                                 fontFamily: 'var(--font-geist-sans), system-ui, sans-serif',
-                                fontWeight: 600,
+                                fontWeight: 500,
                                 textRendering: 'optimizeLegibility',
-                                WebkitFontSmoothing: 'antialiased'
+                                WebkitFontSmoothing: 'antialiased',
+                                fontSize: 'clamp(2.5rem, 6.5vw, 5.2rem)'
                             }}>
-                                Defining the future<br />of AI governance.
+                                {["Defining", "the", "future", "of", "AI", "governance."].map((word, i) => (
+                                    <span key={i} className="inline-block mr-[0.25em] animate-reveal-word" style={{ animationDelay: `${i * 0.12}s` }}>
+                                        <span className="animate-live-float" style={{ animationDelay: `${0.8 + (i * 0.15)}s` }}>
+                                            {word}
+                                        </span>
+                                    </span>
+                                ))}
                             </h1>
 
-                            <p className="text-base md:text-lg text-slate-600 leading-relaxed font-sans max-w-2xl mx-auto tracking-wide" style={{
-                                fontSize: 'clamp(1rem, 1.2vw, 1.125rem)'
+                            <p className="text-slate-600 leading-relaxed font-sans max-w-2xl mx-auto tracking-wide animate-reveal" style={{
+                                fontSize: 'clamp(1.1rem, 1.3vw, 1.25rem)',
+                                animationDelay: '0.8s'
                             }}>
                                 Our industry-leading governance platform delivers continuous oversight across the full AI lifecycle, enabling confident innovation at scale.
                             </p>
 
-                            <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center w-full">
-                                <button className="bg-[#5049f9] hover:bg-[#4039d9] text-white px-8 py-3.5 rounded-lg transition-all duration-300 font-medium text-base inline-flex items-center justify-center gap-2 w-fit transform hover:-translate-y-0.5">
+                            <div className="flex flex-col sm:flex-row gap-8 pt-6 justify-center w-full animate-reveal" style={{ animationDelay: '1s' }}>
+                                <button className="bg-[#5049f9] hover:bg-[#4039d9] text-white px-10 py-3 rounded-xl transition-all duration-300 font-medium text-base inline-flex items-center justify-center gap-2 w-fit transform hover:-translate-y-1 hover:shadow-xl hover:shadow-blue-500/10">
                                     <span>Get a demo</span>
                                 </button>
-                                <button className="bg-white hover:bg-gray-50 text-slate-700 border border-gray-200 px-8 py-3.5 rounded-lg transition-all duration-300 font-medium text-base inline-flex items-center justify-center gap-2 w-fit transform hover:-translate-y-0.5">
+                                <button className="bg-white hover:bg-gray-50 text-slate-700 border border-gray-200 px-10 py-3 rounded-xl transition-all duration-300 font-medium text-base inline-flex items-center justify-center gap-2 w-fit transform hover:-translate-y-1">
                                     <span>View Platform</span>
                                 </button>
                             </div>

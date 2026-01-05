@@ -145,35 +145,58 @@ export const Component: React.FC = () => {
       <Navbar />
 
       <div className="relative z-10 w-full max-w-[1440px] mx-auto px-6 md:px-12 py-32">
-        <div className="grid grid-cols-1 lg:grid-cols-[0.4fr_0.6fr] gap-8 lg:gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-[0.52fr_0.48fr] gap-8 lg:gap-12 items-center">
           {/* Left Side - Content */}
           <div className="space-y-8 animate-fadeIn">
-            <h1 className="text-white leading-[1.15] font-sans font-bold text-[clamp(2.5rem,4.5vw,3.75rem)]" style={{
-              fontWeight: 700,
-              letterSpacing: '-0.02em'
+            <style jsx>{`
+              .btn-underline {
+                position: relative;
+              }
+              .btn-underline::after {
+                content: '';
+                position: absolute;
+                width: 0;
+                height: 1.5px;
+                bottom: -2px;
+                left: 0;
+                background-color: currentColor;
+                transition: width 0.3s ease;
+              }
+              button:hover .btn-underline::after {
+                width: 100%;
+              }
+            `}</style>
+            <h1 className="leading-[1.1] font-sans text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-white/70 text-[clamp(2.5rem,5.5vw,4.5rem)]" style={{
+              fontWeight: 600,
+              letterSpacing: '-0.03em',
+              textRendering: 'optimizeLegibility'
             }}>
-              Defining the future of AI governance.
+              Defining the future<br />of AI governance.
             </h1>
 
-            <p className="text-base md:text-lg text-gray-300 leading-relaxed font-space max-w-xl">
+            <p className="text-white/90 leading-relaxed font-space max-w-xl" style={{
+              fontSize: 'clamp(1.1rem, 1.4vw, 1.3rem)'
+            }}>
               Our industry-leading governance platform delivers continuous oversight across the full AI lifecycle, enabling confident innovation at scale.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <button className="bg-[#5049f9] hover:bg-[#4039d9] text-white px-8 py-3.5 rounded-lg transition-all duration-200 font-space text-base font-medium">
-                Get a demo
+            <div className="flex flex-col sm:flex-row gap-6 pt-4">
+              <button className="bg-[#5049f9] hover:bg-[#4039d9] text-white px-8 py-3 rounded-xl transition-all duration-300 font-space text-base font-medium shadow-lg shadow-blue-500/20 hover:scale-105 active:scale-95">
+                <span className="btn-underline">Get a demo</span>
               </button>
-              <button className="border border-gray-600 hover:border-gray-400 text-white px-8 py-3.5 rounded-lg transition-all duration-200 font-space text-base font-medium flex items-center justify-center gap-2 group">
-                <span>Watch Demo</span>
-                <Play size={16} className="fill-white" />
+              <button className="bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 text-white px-8 py-3 rounded-xl transition-all duration-300 font-space text-base font-medium flex items-center justify-center gap-3 backdrop-blur-sm group hover:scale-105 active:scale-95">
+                <span className="btn-underline">Watch Demo</span>
+                <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-[#5049f9] transition-colors duration-300">
+                  <Play size={12} className="fill-white ml-0.5" />
+                </div>
               </button>
             </div>
           </div>
 
           {/* Right Side - Graphics */}
-          <div className="relative hidden lg:flex justify-end items-center animate-fadeIn animation-delay-500 -mr-12">
+          <div className="relative hidden lg:flex justify-end items-center animate-fadeIn animation-delay-500 -mr-24">
             <div
-              className="relative w-[140%] max-w-[900px] perspective-1000"
+              className="relative w-[150%] max-w-[1100px] perspective-1000"
               onMouseMove={handleMouseMove}
               onMouseEnter={() => setIsHovering(true)}
               onMouseLeave={() => {
