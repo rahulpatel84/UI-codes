@@ -1,0 +1,36 @@
+# dependencies
+node_modules/
+.pnp
+.pnp.*
+.yarn/*
+
+# next.js
+.next/
+out/
+
+# production
+build/
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+*.log
+
+# env files
+.env*
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# Root level ignores
+web/node_modules/
+web/.next/
+web/out/
+web/build/
+web/.vercel/
