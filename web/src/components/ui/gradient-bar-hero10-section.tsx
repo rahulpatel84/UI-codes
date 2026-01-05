@@ -9,13 +9,16 @@ const GradientGrid: React.FC = () => {
     const rowsCenter = (rows - 1) / 2;
 
     const getCellGradient = (col: number, row: number) => {
+        // Holistic AI Blurple (#5049f9) based palette, dark to light
         const gradients = [
-            'linear-gradient(135deg, #1a1670 0%, rgba(26, 22, 112, 0.4) 100%)',
-            'linear-gradient(135deg, #221d8f 0%, rgba(34, 29, 143, 0.3) 100%)',
-            'linear-gradient(135deg, #2d27a8 0%, rgba(45, 39, 168, 0.3) 100%)',
-            'linear-gradient(135deg, #14124f 0%, rgba(20, 18, 79, 0.5) 100%)',
-            'linear-gradient(135deg, #2a2190 0%, rgba(42, 33, 144, 0.3) 100%)',
+            'linear-gradient(135deg, #100b4a 0%, rgba(16, 11, 74, 0.4) 100%)',
+            'linear-gradient(135deg, #181270 0%, rgba(24, 18, 112, 0.3) 100%)',
+            'linear-gradient(135deg, #251d9b 0%, rgba(37, 29, 155, 0.3) 100%)',
+            'linear-gradient(135deg, #3d34d1 0%, rgba(61, 52, 209, 0.3) 100%)',
+            'linear-gradient(135deg, #5049f9 0%, rgba(80, 73, 249, 0.3) 100%)',
         ];
+        // Distribute from bottom-left (dark) to top-right (light)
+        // Or simply cycle based on col/row
         return gradients[(col + row) % gradients.length];
     };
 
@@ -40,7 +43,7 @@ const GradientGrid: React.FC = () => {
                         90deg,
                         transparent 0%,
                         rgba(255, 255, 255, 0) 20%,
-                        rgba(255, 255, 255, 0.12) 50%,
+                        rgba(255, 255, 255, 0.15) 50%,
                         rgba(255, 255, 255, 0) 80%,
                         transparent 100%
                     );
@@ -80,12 +83,12 @@ const GradientGrid: React.FC = () => {
                     return (
                         <div
                             key={index}
-                            className="grid-cell relative border-[0.5px] border-white/5 transition-all duration-700 overflow-hidden flex items-center justify-center"
+                            className="grid-cell relative border-[0.5px] border-white/10 transition-all duration-700 overflow-hidden flex items-center justify-center"
                             style={{
                                 background: getCellGradient(col, row),
                                 animation: 'shining 8s ease-in-out infinite',
                                 animationDelay: `${delay}s`,
-                                opacity: 0.8,
+                                opacity: 0.9,
                             }}
                         >
                             {badge && (
@@ -93,13 +96,13 @@ const GradientGrid: React.FC = () => {
                                     <Badge icon={badge.icon} text={badge.text} delay={`${delay}s`} />
                                 </div>
                             )}
-                            <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-500" />
+                            <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-500" />
                         </div>
                     );
                 })}
             </div>
 
-            <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a2e]/50 via-transparent to-[#0a0a2e]/80 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#080521]/60 via-transparent to-[#080521]/90 pointer-events-none" />
         </div>
     );
 };
@@ -167,10 +170,10 @@ const Navbar: React.FC = () => {
 
 const Badge: React.FC<{ icon: React.ReactNode; text: string; delay: string }> = ({ icon, text, delay }) => (
     <div
-        className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl px-4 py-2.5 flex items-center gap-2 animate-fadeIn hover:bg-white/10 transition-all duration-500 group pointer-events-auto"
+        className="bg-white/10 backdrop-blur-md border border-white/10 rounded-xl px-4 py-2.5 flex items-center gap-2 animate-fadeIn hover:bg-white/20 transition-all duration-500 group pointer-events-auto"
         style={{ animationDelay: delay }}
     >
-        <div className="w-5 h-5 rounded flex items-center justify-center text-white/70 group-hover:text-white transition-colors duration-300">
+        <div className="w-5 h-5 rounded flex items-center justify-center text-white/80 group-hover:text-white transition-colors duration-300">
             {icon}
         </div>
         <span className="text-white/90 font-medium text-sm whitespace-nowrap group-hover:text-white transition-colors duration-300">{text}</span>
@@ -183,7 +186,7 @@ export const Component: React.FC = () => {
             <style jsx global>{`
                 @keyframes shining {
                     0%, 40%, 65%, 100% { filter: brightness(1) saturate(1); }
-                    50% { filter: brightness(1.7) saturate(1.4); }
+                    50% { filter: brightness(1.8) saturate(1.5); }
                 }
                 @keyframes fadeIn {
                     from { opacity: 0; transform: translateY(10px); }
@@ -196,7 +199,7 @@ export const Component: React.FC = () => {
                 .animation-delay-600 { animation-delay: 600ms; }
                 .animation-delay-700 { animation-delay: 700ms; }
             `}</style>
-            <div className="absolute inset-0" style={{ backgroundColor: '#0a0a2e' }}></div>
+            <div className="absolute inset-0" style={{ backgroundColor: '#080521' }}></div>
             <GradientGrid />
             <Navbar />
 
@@ -221,7 +224,7 @@ export const Component: React.FC = () => {
                         </p>
 
                         <div className="flex flex-col sm:flex-row gap-4 pt-2">
-                            <button className="bg-white hover:bg-gray-100 text-black px-7 py-3 rounded-md transition-all duration-200 font-space text-base font-medium inline-flex items-center gap-2 w-fit">
+                            <button className="bg-[#5049f9] hover:bg-[#4039d9] text-white px-7 py-3 rounded-md transition-all duration-200 font-space text-base font-medium inline-flex items-center gap-2 w-fit">
                                 <span>Book a Demo</span>
                                 <span>→→</span>
                             </button>
